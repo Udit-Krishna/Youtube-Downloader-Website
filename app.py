@@ -43,12 +43,15 @@ def send():
                          'outtmpl': 'static/download.mp3',
                         'extractaudio': True,
                         'audioformat': "mp3",}
+            vydl_opts = {'format': 'bestvideo[filesize<500M][height<=?720]+bestaudio/best',
+                         'outtmpl': 'static/download',}
             if fmt == 'audio':
                 with youtube_dl.YoutubeDL(aydl_opts) as ydl:
                     ydl.download([f'{link}'])
                     return render_template('final_audio.html')
             if fmt == 'video':
-                os.system(f'youtube-dl -f "bestvideo[filesize<500M][height<=?720]+bestaudio/best" -o "/static/download" --no-continue {link}')
+                with youtube_dl.YoutubeDL(vydl_opts) as ydl:
+                    ydl.download([f'{link}'])
                 return render_template('final_video.html')
         except:
             return render_template('errorpage.html')
