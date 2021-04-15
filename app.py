@@ -58,6 +58,7 @@ def send():
                 for a in l:
                     if a.split('.')[0]=='download':
                         vid_name.append(a)
+                print(vid_name)
                 filename = vid_name[0]
                 return render_template('final_video.html', filename = filename)
         except:
