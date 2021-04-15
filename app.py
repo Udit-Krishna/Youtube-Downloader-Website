@@ -6,23 +6,23 @@ import os
 
 app = Flask(__name__,static_url_path='/static')
 
-#@app.route('/final_vid')
-#def final_vid():
-#    l = os.listdir('static')
-#    vid_name = []
-#    for a in l:
-#        if a.split('.')[0]=='download':
-#            vid_name.append(a)
-#    filename = vid_name[0]
-#    return render_template('final_video.html', filename = filename)
+@app.route('/final_vid')
+def final_vid():
+    l = os.listdir('static')
+    vid_name = []
+    for a in l:
+        if a.split('.')[0]=='download':
+            vid_name.append(a)
+    filename = vid_name[0]
+    return render_template('final_video.html', filename = filename)
 
-#@app.route('/final_aud')
-#def final_aud():
-#    files = os.listdir('static') 
-#    for a in files:
-#        if a.split('.')[0] == 'download':
-#            fo = a
-#    return render_template('final_video.html', filename = fo)
+@app.route('/final_aud')
+def final_aud():
+    files = os.listdir('static') 
+    for a in files:
+        if a.split('.')[0] == 'download':
+            fo = a
+    return render_template('final_video.html', filename = fo)
 
 @app.route('/',methods=['POST','GET'])
 def send():
