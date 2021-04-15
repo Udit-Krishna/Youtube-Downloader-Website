@@ -44,7 +44,7 @@ def send():
                             'outtmpl': 'static/download.mp3',
                         'extractaudio': True,
                         'audioformat': "mp3",}
-            vydl_opts = {'format': 'bestvideo[filesize<300M][height<=?1080]+bestaudio/best',
+            vydl_opts = {'format': 'bestvideo[filesize<50M][height<=?1080]+bestaudio/best',
                             'outtmpl': 'static/download',}
             if fmt == 'audio':
                 with youtube_dl.YoutubeDL(aydl_opts) as ydl:
