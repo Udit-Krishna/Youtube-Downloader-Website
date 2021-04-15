@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>YouTube Video Downloader</title>  
+    <link rel="icon" href="{{url_for('static', filename='icon.png')}}" type="image/icon type">
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+    <style>
+      body {
+        background-image: url('/static/background.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+      }
+      </style>
+</head>
+<body>
+<center><br><img src="{{url_for('static', filename='logo.ico')}}" align="left" height="100"/>
+<font style="font-family: Georgia, 'Times New Roman', Times, serif;">
+<h1><b><u><i>YouTube Video Downloader</i></u></b></h1><br>
+<font style="font-family: Georgia, 'Times New Roman', Times, serif;"><hr><br><br>
+  <br><br>
+  <form action="/download" method="POST"><br>
+  {% for value in resolution %}
+    <input type="radio" name="resolution" value="{{ value }}"> {{ value.resolution }}<br><br>
+  {% endfor %}
+  <br><br>
+  <input type="submit" value="Download!" /> </form>
+</font><br><br><hr><br><br><br><br>
+<footer><small>© UK YOUTUBE VIDEO DOWNLOADER 2021</small></footer></footer></center>
+</body>
+</html>
