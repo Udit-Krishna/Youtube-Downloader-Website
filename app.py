@@ -8,11 +8,13 @@ app = Flask(__name__,static_url_path='/static')
 
 @app.route('/final_vid')
 def final_vid():
-    files = os.listdir('static') 
-    for a in files:
-        if a.split('.')[0] == 'download':
-            fo = a
-    return render_template('final_video.html', filename = fo)
+    l = os.listdir('static')
+    vid_name = []
+    for a in l:
+        if a.split('.')[0]=='download':
+            vid_name.append(a)
+    filename = vid_name[0]
+    return render_template('final_video.html', filename = filename)
 
 @app.route('/final_aud')
 def final_aud():
@@ -29,22 +31,21 @@ def send():
         fmt=request.form['options']
         if not fmt:
             fmt = 'video'
-        print(link,fmt)
         try:
-            os.remove('static/download.mp3')
-        except:
-            pass
-        try:
-            os.remove('static/download.mkv')
+            l = os.listdir('static')
+            vid_name = []
+            for a in l:
+                if a.split('.')[0]=='download':
+                    os.remove(f'static/{a}')
         except:
             pass
         try:
             aydl_opts = {'format': 'bestaudio/best',
-                         'outtmpl': 'static/download.mp3',
+                            'outtmpl': 'static/download.mp3',
                         'extractaudio': True,
                         'audioformat': "mp3",}
-            vydl_opts = {'format': 'bestvideo[filesize<500M][height<=?720]+bestaudio/best',
-                         'outtmpl': 'static/download',}
+            vydl_opts = {'format': 'bestvideo[filesize<300M][height<=?1080]+bestaudio/best',
+                            'outtmpl': 'static/download',}
             if fmt == 'audio':
                 with youtube_dl.YoutubeDL(aydl_opts) as ydl:
                     ydl.download([f'{link}'])
@@ -52,7 +53,13 @@ def send():
             if fmt == 'video':
                 with youtube_dl.YoutubeDL(vydl_opts) as ydl:
                     ydl.download([f'{link}'])
-                return render_template('final_video.html')
+                l = os.listdir('static')
+                vid_name = []
+                for a in l:
+                    if a.split('.')[0]=='download':
+                        vid_name.append(a)
+                filename = vid_name[0]
+                return render_template('final_video.html', filename = filename)
         except:
             return render_template('errorpage.html')
     return render_template("main.html")
