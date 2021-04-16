@@ -70,6 +70,7 @@ def remove_file1():
 
 @app.after_request
 def remove_file2(response):
+    sleep(1)
     if request.path.find('/static/download') != -1:
         try:
             l = os.listdir('static')
