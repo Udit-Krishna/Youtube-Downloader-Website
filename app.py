@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request
-from flask import render_template, redirect, send_from_directory, send_file
+from flask import render_template
 import youtube_dl
 import os
 from time import sleep
@@ -52,7 +52,6 @@ def send():
                 l = os.listdir('static')
                 vid_name = []
                 for a in l:
-                    print(a)
                     if a.split('.')[0]=='download':
                         vid_name.append(a)
                 filename = vid_name[0]
@@ -82,11 +81,12 @@ def remove_file1():
 #            l = os.listdir('static')
 #            for a in l:
 #                if a.find('download') != -1:
+#                    print(a)
 #                    os.remove(f'static/{a}')     
 #        except:
 #            pass
 #    return response
-        
+       
 if __name__=="__main__":
     app.run()
 
