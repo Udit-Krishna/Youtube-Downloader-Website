@@ -38,7 +38,7 @@ def send():
                             'outtmpl': 'static/downloads/download.mp3',
                         'extractaudio': True,
                         'audioformat': "mp3",}
-            vydl_opts = {'format': 'bestvideo[filesize<50M][height<=?1080]+bestaudio/best',
+            vydl_opts = {'format': 'bestvideo[filesize<30M][height<=?1080]+bestaudio/best',
                         'outtmpl': 'static/downloads/download',}
             if fmt == 'audio':
                 with youtube_dl.YoutubeDL(aydl_opts) as ydl:
@@ -48,7 +48,7 @@ def send():
                     return send_from_directory('static/downloads', 'download.mp3', as_attachment=True)
             if fmt == 'video':
                 if link.find('twitter') != -1:
-                    vydl_opts = {'format': 'bestvideo[filesize<50M][height<=?1080]+bestaudio/best',
+                    vydl_opts = {'format': 'bestvideo[filesize<10M][height<=?720]+bestaudio/best',
                         'outtmpl': 'static/downloads/download.mp4',}
                 with youtube_dl.YoutubeDL(vydl_opts) as ydl:
                     ydl.download([f'{link}'])
