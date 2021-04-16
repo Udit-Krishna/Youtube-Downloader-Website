@@ -12,6 +12,11 @@
         background-attachment: fixed;
         background-size: cover;
       }
+      input[type='radio'] {
+        height: 20px;
+        width: 20px;
+      vertical-align: middle;
+      }
       </style>
 </head>
 <body>
@@ -21,8 +26,8 @@
 <font style="font-family: Georgia, 'Times New Roman', Times, serif;"><hr><br><br>
   <br><br>
  <form method="POST" action="/">
-    <label for="name">Link:</label>
-    <input type="text" id="link" name="link" size="50"><br><br>
+    <label for="name"><center><h4>Link</h4></center></label>
+    <input type="text" id="link" name="link" size="40"><br><br>
     <input type="radio" name="options" id="video" value="video"> Video </input><br>
     <input type="radio" name="options" id="audio" value="audio"> Audio </input><br><br>
     <input type="submit" value="Submit">
