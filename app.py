@@ -43,9 +43,9 @@ def send():
             if fmt == 'audio':
                 with youtube_dl.YoutubeDL(aydl_opts) as ydl:
                     ydl.download([f'{link}'])
-                    #return render_template('final_audio.html')
+                    return render_template('final_audio.html')
                     #return redirect(f'/static/download.mp3')
-                    return send_from_directory(directory='static', filename='download.mp3')
+                    #return send_from_directory(directory='static', filename='download.mp3')
             if fmt == 'video':
                 with youtube_dl.YoutubeDL(vydl_opts) as ydl:
                     ydl.download([f'{link}'])
@@ -56,9 +56,9 @@ def send():
                     if a.split('.')[0]=='download':
                         vid_name.append(a)
                 filename = vid_name[0]
-                #return render_template('final_video.html', filename = filename)
+                return render_template('final_video.html', filename = filename)
                 #return redirect(f'/static/{filename}')
-                return send_from_directory(directory='static', filename=filename)
+                #return send_from_directory(directory='static', filename=filename)
         except:
             return render_template('errorpage.html')
     return render_template("main.html")
