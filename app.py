@@ -56,8 +56,8 @@ def send():
                         vid_name.append(a)
                 filename = vid_name[0]
                 #return render_template('final_video.html', filename = filename)
-                #return redirect(f'/static/{filename}')
-                return send_from_directory('static', filename)
+                return redirect(f'/static/{filename}')
+                #return send_from_directory('static', filename)
         except:
             return render_template('errorpage.html')
     return render_template("main.html")
