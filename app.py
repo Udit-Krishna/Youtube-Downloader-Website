@@ -74,18 +74,18 @@ def remove_file1():
         except:
             pass
 
-@app.after_request
-def remove_file2(response):
-    sleep(1)
-    if request.path.find('/static/download') != -1:
-        try:
-            l = os.listdir('static')
-            for a in l:
-                if a.find('download') != -1:
-                    os.remove(f'static/{a}')     
-        except:
-            pass
-    return response
+#@app.after_request
+#def remove_file2(response):
+#    sleep(1)
+#    if request.path.find('/static/download') != -1:
+#        try:
+#            l = os.listdir('static')
+#            for a in l:
+#                if a.find('download') != -1:
+#                    os.remove(f'static/{a}')     
+#        except:
+#            pass
+#    return response
         
 if __name__=="__main__":
     app.run()
