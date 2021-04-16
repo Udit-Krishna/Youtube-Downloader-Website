@@ -64,7 +64,7 @@ def send():
 
 @app.before_request
 def remove_file1():
-    if request.path == '/':
+    if request.path == '/' or request.path.find('/static/download') != -1:
         try:
             l = os.listdir('static')
             for a in l:
