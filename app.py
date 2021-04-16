@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
+from flask.helpers import url_for
 import youtube_dl
 import os
 from time import sleep
@@ -25,6 +26,7 @@ app = Flask(__name__, static_url_path='/static')
 #            fo = a
 #    return render_template('final_audio.html', filename =fo)
 
+
 @app.route('/',methods=['POST','GET'])
 def send():
     if request.method== 'POST':
@@ -38,7 +40,7 @@ def send():
                         'extractaudio': True,
                         'audioformat': "mp3",}
             vydl_opts = {'format': 'bestvideo[filesize<50M][height<=?1080]+bestaudio/best',
-                            'outtmpl': 'static/download',}
+                        'outtmpl': 'static/download',}
             if fmt == 'audio':
                 with youtube_dl.YoutubeDL(aydl_opts) as ydl:
                     ydl.download([f'{link}'])

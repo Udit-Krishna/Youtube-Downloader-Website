@@ -7,24 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" /> 
     <style>
       body {
-        background-image: url('/static/bground.jpg');
+        background-image: url('/static/bground2.jpg');
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
+      }
+      body {
+        font-family: 'Roboto';font-size: 22px;
       }
       </style>
 </head>
 <body>
 <center><br><img src="{{url_for('static', filename='logo.ico')}}" align="left" height="100"/>
-<font style="font-family: Georgia, 'Times New Roman', Times, serif;">
-<h1><b><u><i>YouTube Video Downloader</i></u></b></h1><br>
-<font style="font-family: Georgia, 'Times New Roman', Times, serif;"><hr><br><br>
-  <br><br>
-<video width = "720" height="720" controls>
+<h1><b><u><i>YouTube Video Downloader</i></u></b></h1><br><hr><br>
+<video width = "640" height="360" controls>
   <source src={{ url_for("static", filename=filename) }} type="video/mp4">
     Your browser does not support the video tag.
-</video>
-</font><br><br><hr><br><br><br><br>
-<footer><small>© UK YOUTUBE VIDEO DOWNLOADER 2021</small></footer></footer></center>
+</video><br><hr><br>
+<footer><small><p>To download video/audio upto 100MB from various websites like YouTube, Facebook, Twitter, etc.</p></small></footer></footer></center>
 </body>
 </html>

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" /> 
     <style>
       body {
-        background-image: url('/static/bground.jpg');
+        background-image: url('/static/bground2.jpg');
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
@@ -15,24 +15,42 @@
       input[type='radio'] {
         height: 20px;
         width: 20px;
-      vertical-align: middle;
+        vertical-align: middle;
+      }
+      body {
+        font-family: 'Roboto';font-size: 22px;
+      }
+      input[type='submit'] {
+        border-radius: 5px;
+        border: 5;
+        width: 105px;
+        height: 35px;
+        font-family: Verdana;
+        font-size:medium;
+        background: #ffffff36;
+      }
+      input[type=text] {
+        padding: 5px 2px;
+        margin: 10px 10px;
+        box-sizing: border-box;
+        border: 2px #0f0f0fb9;
+        border-radius: 10px;
+        background-color: #ffffffc0;
+        size: 20px 15px;
       }
       </style>
 </head>
 <body>
 <center><br><img src="{{url_for('static', filename='logo.ico')}}" align="left" height="100"/>
-<font style="font-family: Georgia, 'Times New Roman', Times, serif;">
-<h1><b><u><i>YouTube Video Downloader</i></u></b></h1><br>
-<font style="font-family: Georgia, 'Times New Roman', Times, serif;"><hr><br><br>
-  <br><br>
+<h1><b><u><i>YouTube Video Downloader</i></u></b></h1><br><hr><br><br>
  <form method="POST" action="/">
-    <label for="name"><center><h4>Link</h4></center></label>
+    <label for="name"><h4>Link here</h4></label>
     <input type="text" id="link" name="link" size="40"><br><br>
-    <input type="radio" name="options" id="video" value="video"> Video </input><br>
-    <input type="radio" name="options" id="audio" value="audio"> Audio </input><br><br>
-    <input type="submit" value="Submit">
+    <input type="radio" name="options" id="video" value="video" required> Video </input><br>
+    <input type="radio" name="options" id="audio" value="audio" required> Audio </input><br><br>
+    <input type="submit" value="Download" size="30">
   </form>
-</font><br><br><hr><br><br><br><br>
-<footer><small>© UK YOUTUBE VIDEO DOWNLOADER 2021</small></footer></footer></center>
+<br><br><hr><br><br>
+<footer><small><p>To download video/audio upto 100MB from various websites like YouTube, Facebook, Twitter, etc.</p></small></footer></footer></center>
 </body>
 </html>
