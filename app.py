@@ -33,59 +33,59 @@ def send():
         fmt=request.form['options']
         if not fmt:
             fmt = 'video'
-        try:
-            aydl_opts = {'format': 'bestaudio/best',
-                            'outtmpl': 'static/downloads/download.mp3',
-                        'extractaudio': True,
-                        'audioformat': "mp3",}
-            vydl_opts = {'format': 'bestvideo[filesize<20M][height<=?1080]+bestaudio/best',
-                        'outtmpl': 'static/downloads/download',}
-            if fmt == 'audio':
-                with youtube_dl.YoutubeDL(aydl_opts) as ydl:
-                    ydl.download([f'{link}'])
-                    #return render_template('final_audio.html')
-                    #return redirect(f'/static/download.mp3')
-                    return send_from_directory('static/downloads', 'download.mp3', as_attachment=True)
-            if fmt == 'video':
-                if link.find('twitter') != -1:
-                    vydl_opts = {'format': 'bestvideo[filesize<10M][height<=?720]+bestaudio/best',
-                        'outtmpl': 'static/downloads/download.mp4',}
-                with youtube_dl.YoutubeDL(vydl_opts) as ydl:
-                    ydl.download([f'{link}'])
-                l = os.listdir('static/downloads')
-                vid_name = []
-                for a in l:
-                    if a.split('.')[0]=='download':
-                        vid_name.append(a)
-                filename = vid_name[0]
-                #return render_template('final_video.html', filename = filename)
-                #return redirect(f'/static/{filename}')
-                return send_from_directory('static/downloads', filename, as_attachment = True)
-        except:
-            return render_template('errorpage.html')
+        #try:
+        aydl_opts = {'format': 'bestaudio/best',
+                        'outtmpl': 'downloads/download.mp3',
+                    'extractaudio': True,
+                    'audioformat': "mp3",}
+        vydl_opts = {'format': 'bestvideo[filesize<20M][height<=?1080]+bestaudio/best',
+                    'outtmpl': 'downloads/download',}
+        if fmt == 'audio':
+            with youtube_dl.YoutubeDL(aydl_opts) as ydl:
+                ydl.download([f'{link}'])
+                #return render_template('final_audio.html')
+                #return redirect(f'/static/download.mp3')
+                return send_from_directory('downloads', 'download.mp3', as_attachment=True)
+        if fmt == 'video':
+            if link.find('twitter') != -1:
+                vydl_opts = {'format': 'bestvideo[filesize<10M][height<=?720]+bestaudio/best',
+                    'outtmpl': 'downloads/download.mp4',}
+            with youtube_dl.YoutubeDL(vydl_opts) as ydl:
+                ydl.download([f'{link}'])
+            l = os.listdir('downloads')
+            vid_name = []
+            for a in l:
+                if a.split('.')[0]=='download':
+                    vid_name.append(a)
+            filename = vid_name[0]
+            #return render_template('final_video.html', filename = filename)
+            #return redirect(f'/static/{filename}')
+            return send_from_directory('downloads', filename, as_attachment = True)
+        #except:
+        #    return render_template('errorpage.html')
     return render_template("main.html")
 
 @app.before_request
 def remove_file1():
-    if request.path == '/' and request.path.find('/static/downloads/download') == -1:
+    if request.path == '/' and request.path.find('/downloads/download') == -1:
         try:
-            l = os.listdir('static/downloads')
+            l = os.listdir('downloads')
             for a in l:
                 if a.find('download') != -1:
-                    os.remove(f'static/downloads/{a}')     
+                    os.remove(f'downloads/{a}')     
         except:
             pass
 
 @app.after_request
 def remove_file2(response):
     sleep(1)
-    if request.path.find('/static/download') != -1:
+    if request.path.find('/download') != -1:
         try:
-            l = os.listdir('static')
+            l = os.listdir('downloads')
             for a in l:
                 if a.find('download') != -1:
                     print(a)
-                    os.remove(f'static/{a}')     
+                    os.remove(f'downloads/{a}')     
         except:
             pass
     return response
