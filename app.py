@@ -7,32 +7,12 @@ from time import sleep
 
 app = Flask(__name__, static_url_path='/static')
 
-#@app.route('/final')
-#def final():
-#    l = os.listdir('static')
-#    vid_name = []
-#    for a in l:
-#        if a.split('.')[0]=='download':
-#            vid_name.append(a)
-#    filename = vid_name[0]
-#    return render_template('final_video.html', filename = filename)
-
-#@app.route('/final')
-#def final_aud():
-#    files = os.listdir('static') 
-#    for a in files:
-#        if a.split('.')[0] == 'download':
-#            fo = a
-#    return render_template('final_audio.html', filename =fo)
-
 
 @app.route('/',methods=['POST','GET'])
 def send():
     if request.method== 'POST':
         link=request.form['link']
         fmt=request.form['options']
-        if not fmt:
-            fmt = 'video'
         try:
             aydl_opts = {'format': 'bestaudio/best',
                             'outtmpl': 'downloads/download.mp3',
@@ -43,8 +23,6 @@ def send():
             if fmt == 'audio':
                 with youtube_dl.YoutubeDL(aydl_opts) as ydl:
                     ydl.download([f'{link}'])
-                    #return render_template('final_audio.html')
-                    #return redirect(f'/static/download.mp3')
                     return send_from_directory('downloads', 'download.mp3', as_attachment=True)
             if fmt == 'video':
                 if link.find('twitter') != -1:
@@ -58,8 +36,6 @@ def send():
                     if a.split('.')[0]=='download':
                         vid_name.append(a)
                 filename = vid_name[0]
-                #return render_template('final_video.html', filename = filename)
-                #return redirect(f'/static/{filename}')
                 return send_from_directory('downloads', filename, as_attachment = True)
         except:
             return render_template('errorpage.html')
